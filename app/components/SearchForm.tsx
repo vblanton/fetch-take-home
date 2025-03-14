@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { searchDogs, getBreeds } from '../services/dogs';
 import { Spinner } from './Spinner';
+
 interface SearchParams {
   breeds?: string[];
   zipCodes?: string[];
@@ -106,17 +107,20 @@ export default function SearchForm() {
   };
 
   return (
-    <form name="search" onSubmit={handleSearch} className="space-y-4 text-black w-full">
+    <form name="search" onSubmit={handleSearch} className="space-y-4 text-black w-full" role="search">
       <div className="flex flex-wrap gap-4 items-end">
         <div className="flex-1 min-w-[calc(50%-8px)] md:min-w-0">
-          <label className="block mb-2 text-sm">Breeds</label>
+          <label htmlFor="breed-select" className="block mb-2 text-sm">Breeds</label>
           <select
+            id="breed-select"
             value={selectedBreed}
             onChange={handleBreedChange}
             disabled={isBreedsLoading}
             className={`border border-gray-400 p-2 rounded w-full focus:border-purple-900 focus:outline-none ${
               isBreedsLoading ? 'bg-gray-100 cursor-not-allowed' : ''
             }`}
+            aria-label="Select a breed to add"
+            aria-disabled={isBreedsLoading}
           >
             <option value="">{isBreedsLoading ? 'Loading breeds...' : 'Select a breed to add'}</option>
             {availableBreeds.map((breed) => (
@@ -126,9 +130,10 @@ export default function SearchForm() {
         </div>
 
         <div className="flex-1 min-w-[calc(50%-8px)] md:min-w-0">
-          <label className="block mb-2 text-sm">Zip Codes</label>
+          <label htmlFor="zip-code-input" className="block mb-2 text-sm">Zip Codes</label>
           <div className="flex gap-2 w-full">
             <input
+              id="zip-code-input"
               type="text"
               value={newZipCode}
               onChange={(e) => setNewZipCode(e.target.value)}
@@ -142,11 +147,13 @@ export default function SearchForm() {
                   handleZipCodeAddClick();
                 }
               }}
+              aria-label="Enter zip code"
             />
             <button
               type="button"
               onClick={handleZipCodeAddClick}
               className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 whitespace-nowrap shrink-0"
+              aria-label="Add zip code"
             >
               Add
             </button>
@@ -154,31 +161,37 @@ export default function SearchForm() {
         </div>
 
         <div className="flex-1 min-w-[calc(50%-8px)] md:min-w-0">
-          <label className="block mb-2 text-sm">Age Range</label>
+          <label htmlFor="age-range" className="block mb-2 text-sm">Age Range</label>
           <div className="flex gap-2">
             <input
+              id="age-min"
               type="number"
               value={ageMin || ''}
               onChange={(e) => setAgeMin(e.target.value ? Number(e.target.value) : undefined)}
               placeholder="Min"
               className="border border-gray-400 p-2 rounded w-1/2 focus:border-purple-900 focus:outline-none"
+              aria-label="Minimum age"
             />
             <input
+              id="age-max"
               type="number"
               value={ageMax || ''}
               onChange={(e) => setAgeMax(e.target.value ? Number(e.target.value) : undefined)}
               placeholder="Max"
               className="border border-gray-400 p-2 rounded w-1/2 focus:border-purple-900 focus:outline-none"
+              aria-label="Maximum age"
             />
           </div>
         </div>
 
         <div className="flex-1 min-w-[calc(50%-8px)] md:min-w-0">
-          <label className="block mb-2 text-sm">Sort By</label>
+          <label htmlFor="sort-select" className="block mb-2 text-sm">Sort By</label>
           <select
+            id="sort-select"
             value={sort}
             onChange={(e) => setSort(e.target.value)}
             className="border border-gray-400 p-2 rounded w-full focus:border-purple-900 focus:outline-none"
+            aria-label="Sort results by"
           >
             <option value="breed:asc">Breed (A-Z)</option>
             <option value="breed:desc">Breed (Z-A)</option>
@@ -194,6 +207,8 @@ export default function SearchForm() {
             type="submit" 
             className="flex-1 px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800 disabled:opacity-50 h-11"
             disabled={isLoading || isBreedsLoading}
+            aria-label="Search dogs"
+            aria-disabled={isLoading || isBreedsLoading}
           >
             Search {isLoading && <Spinner />}
           </button>
@@ -202,6 +217,8 @@ export default function SearchForm() {
             onClick={handleReset}
             className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 h-11"
             disabled={isLoading || isBreedsLoading}
+            aria-label="Reset search form"
+            aria-disabled={isLoading || isBreedsLoading}
           >
             Reset
           </button>
@@ -210,17 +227,19 @@ export default function SearchForm() {
 
       {/* Active Filters Section */}
       {(breeds.length > 0 || zipCodes.length > 0 || ageMin !== undefined || ageMax !== undefined) && (
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2" role="list">
           {breeds.map((breed) => (
             <div
               key={`breed-${breed}`}
               className="flex items-center gap-1 bg-purple-100 text-purple-900 px-2 py-1 rounded"
+              role="listitem"
             >
               <span>Breed: {breed}</span>
               <button
                 type="button"
                 onClick={() => removeBreed(breed)}
                 className="text-purple-900 hover:text-purple-700"
+                aria-label={`Remove ${breed} from selected breeds`}
               >
                 ×
               </button>
@@ -230,19 +249,21 @@ export default function SearchForm() {
             <div
               key={`zip-${zip}`}
               className="flex items-center gap-1 bg-blue-100 text-blue-900 px-2 py-1 rounded"
+              role="listitem"
             >
               <span>ZIP: {zip}</span>
               <button
                 type="button"
                 onClick={() => removeZipCode(zip)}
                 className="text-blue-900 hover:text-blue-700"
+                aria-label={`Remove ${zip} from selected zip codes`}
               >
                 ×
               </button>
             </div>
           ))}
           {(ageMin !== undefined || ageMax !== undefined) && (
-            <div className="flex items-center gap-1 bg-green-100 text-green-900 px-2 py-1 rounded">
+            <div className="flex items-center gap-1 bg-green-100 text-green-900 px-2 py-1 rounded" role="listitem">
               <span>
                 Age: {ageMin !== undefined ? ageMin : '0'} - {ageMax !== undefined ? ageMax : '∞'}
               </span>
@@ -253,6 +274,7 @@ export default function SearchForm() {
                   setAgeMax(undefined);
                 }}
                 className="text-green-900 hover:text-green-700"
+                aria-label="Clear age range"
               >
                 ×
               </button>
