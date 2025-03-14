@@ -69,6 +69,7 @@ export const searchNearbyLocations = async (
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       body: JSON.stringify(searchParams),
       credentials: 'include',
@@ -120,6 +121,7 @@ export const searchDogs = async (
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       credentials: 'include',
     });
@@ -139,6 +141,7 @@ export const searchDogs = async (
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       body: JSON.stringify(resultIds),
       credentials: 'include',
@@ -199,6 +202,7 @@ export const getLocations = async (zipCodes: string[]): Promise<Location[]> => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       body: JSON.stringify(zipCodes),
       credentials: 'include',
@@ -220,6 +224,7 @@ export async function matchDogs(dogIds: string[]): Promise<string> {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     credentials: 'include',
     body: JSON.stringify(dogIds)
@@ -239,6 +244,7 @@ export async function getBreeds(): Promise<string[]> {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       credentials: 'include',
     });
