@@ -14,6 +14,7 @@ export const login = async (credentials: LoginCredentials): Promise<void> => {
     },
     body: JSON.stringify(credentials),
     credentials: 'include',
+    mode: 'cors',
   });
 
   if (!response.ok) {
@@ -24,27 +25,19 @@ export const login = async (credentials: LoginCredentials): Promise<void> => {
 };
 
 export const logout = async (): Promise<void> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      credentials: 'include',
-    });
+  const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    credentials: 'include',
+    mode: 'cors',
+  });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Logout error:', errorText);
-      throw new Error('Logout failed');
-    }
-
-    // Clear localStorage
-    localStorage.removeItem('auth_state');
-    localStorage.removeItem('dogFavorites');
-  } catch (error) {
-    console.error('Logout error:', error);
-    throw error;
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('Logout error:', errorText);
+    throw new Error('Logout failed');
   }
 }; 

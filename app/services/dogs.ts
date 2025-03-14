@@ -2,6 +2,16 @@ import { Dog, Location } from '@/app/types/types';
 
 const API_BASE_URL = 'https://frontend-take-home-service.fetch.com';
 
+// Common fetch options for all API calls
+const fetchOptions = {
+  credentials: 'include' as const,
+  mode: 'cors' as const,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
+};
+
 export interface DogsResponse {
   resultIds: string[];
   total: number;
@@ -67,12 +77,8 @@ export const searchNearbyLocations = async (
 
     const response = await fetch(`${API_BASE_URL}/locations/search`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
+      ...fetchOptions,
       body: JSON.stringify(searchParams),
-      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -119,11 +125,7 @@ export const searchDogs = async (
     // First, get the IDs of matching dogs
     const searchResponse = await fetch(`${API_BASE_URL}/dogs/search?${queryParams.toString()}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      credentials: 'include',
+      ...fetchOptions,
     });
 
     if (!searchResponse.ok) {
@@ -139,12 +141,8 @@ export const searchDogs = async (
     // Then, get the actual dog data for these IDs
     const dogsResponse = await fetch(`${API_BASE_URL}/dogs`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
+      ...fetchOptions,
       body: JSON.stringify(resultIds),
-      credentials: 'include',
     });
 
     if (!dogsResponse.ok) {
@@ -200,12 +198,8 @@ export const getLocations = async (zipCodes: string[]): Promise<Location[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/locations`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
+      ...fetchOptions,
       body: JSON.stringify(zipCodes),
-      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -220,13 +214,9 @@ export const getLocations = async (zipCodes: string[]): Promise<Location[]> => {
 };
 
 export async function matchDogs(dogIds: string[]): Promise<string> {
-  const response = await fetch('https://frontend-take-home-service.fetch.com/dogs/match', {
+  const response = await fetch(`${API_BASE_URL}/dogs/match`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    credentials: 'include',
+    ...fetchOptions,
     body: JSON.stringify(dogIds)
   });
 
@@ -242,11 +232,7 @@ export async function getBreeds(): Promise<string[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/dogs/breeds`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      credentials: 'include',
+      ...fetchOptions,
     });
 
     if (!response.ok) {
