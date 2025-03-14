@@ -31,7 +31,7 @@ export default function MatchedDog({ dog, onTryAgain }: MatchedDogProps) {
     <>
       {showConfetti && <Confetti onComplete={() => setShowConfetti(false)} />}
       <div className="w-full mx-auto mt-[-64px]">
-        <div className="bg-white mx-2 rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-white mx-2 rounded-lg pt-2 shadow-lg overflow-hidden">
           <div className="transition-all duration-500 relative h-96 md:h-128 w-full overflow-hidden">
             <div className="absolute inset-0 blur-[4px] m-[-4px]">
               <Image
