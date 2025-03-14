@@ -34,7 +34,7 @@ export default function AuthOrSearchSection() {
     return (
       <div 
         id="auth-or-search-section" 
-        className="shadow-md h-fit mx-4 rounded-lg bg-white mt-[-4rem] p-4 relative z-10 flex flex-col items-center justify-center transition-all duration-500">
+        className="shadow-md h-fit mx-4 rounded-lg dark:bg-gray-100 bg-white mt-[-4rem] p-4 relative z-10 flex flex-col items-center justify-center transition-all duration-500">
         <div className="w-full animate-pulse">
           <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
           <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto mb-4"></div>
@@ -50,7 +50,7 @@ export default function AuthOrSearchSection() {
     <div 
       id="auth-or-search-section" 
       className={`shadow-md h-fit mx-2 md:mx-4 rounded-lg mt-[-4rem] p-4 relative z-10 flex flex-col items-center justify-center transition-all duration-500 ${
-        isDarkened ? 'bg-purple-400' : 'bg-white'
+        isDarkened ? 'bg-purple-400' : 'dark:bg-gray-100 bg-white'
       }`}>
         {isLoggedIn ? (
           <SearchForm />

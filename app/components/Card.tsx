@@ -11,7 +11,7 @@ interface CardProps {
 }
 
 const CardSkeleton = () => (
-  <div className="card bg-white rounded-lg shadow-md relative animate-pulse">
+  <div className="card bg-white dark:bg-gray-100 rounded-lg shadow-md relative animate-pulse">
     <div className="relative aspect-[4/3] bg-gray-200 rounded-t-lg" />
     <div className="p-4">
       <div className="h-6 bg-gray-200 rounded w-3/4 mb-4" />
