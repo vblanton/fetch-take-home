@@ -116,7 +116,7 @@ export default function SearchForm() {
             value={selectedBreed}
             onChange={handleBreedChange}
             disabled={isBreedsLoading}
-            className={`border border-gray-400 p-2 rounded w-full focus:border-purple-900 focus:outline-none ${
+            className={`border border-gray-400 p-2 rounded w-full focus:border-purple-900 focus:outline-none h-[42px] ${
               isBreedsLoading ? 'bg-gray-100 cursor-not-allowed' : ''
             }`}
             aria-label="Select a breed to add"
@@ -190,7 +190,7 @@ export default function SearchForm() {
             id="sort-select"
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="border border-gray-400 p-2 rounded w-full focus:border-purple-900 focus:outline-none"
+            className="border border-gray-400 p-2 rounded w-full focus:border-purple-900 focus:outline-none h-[42px]"
             aria-label="Sort results by"
           >
             <option value="breed:asc">Breed (A-Z)</option>
