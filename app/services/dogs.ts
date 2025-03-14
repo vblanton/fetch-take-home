@@ -1,14 +1,9 @@
 import { Dog, Location } from '@/app/types/types';
 
-const API_BASE_URL = 'https://frontend-take-home-service.fetch.com';
-
 // Common fetch options for all API calls
 const fetchOptions = {
-  credentials: 'include' as const,
-  mode: 'cors' as const,
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
   },
 };
 
@@ -75,7 +70,7 @@ export const searchNearbyLocations = async (
       }
     };
 
-    const response = await fetch(`${API_BASE_URL}/locations/search`, {
+    const response = await fetch('/api/locations?action=search', {
       method: 'POST',
       ...fetchOptions,
       body: JSON.stringify(searchParams),
@@ -85,17 +80,23 @@ export const searchNearbyLocations = async (
       throw new Error('Failed to search locations');
     }
 
-    const { results } = await response.json();
+    const data = await response.json();
+    
+    // The API returns an array directly, not wrapped in a results object
+    if (!Array.isArray(data)) {
+      console.error('Invalid response format:', data);
+      return [];
+    }
     
     // Sort locations by distance from user
-    return results.sort((a: { latitude: number; longitude: number; }, b: { latitude: number; longitude: number; }) => {
+    return data.sort((a: { latitude: number; longitude: number; }, b: { latitude: number; longitude: number; }) => {
       const distA = calculateDistance(latitude, longitude, a.latitude, a.longitude);
       const distB = calculateDistance(latitude, longitude, b.latitude, b.longitude);
       return distA - distB;
     });
   } catch (error) {
     console.error('Error searching locations:', error);
-    throw error;
+    return [];
   }
 };
 
@@ -121,9 +122,10 @@ export const searchDogs = async (
     if (searchParams.zipCodes?.length) searchParams.zipCodes.forEach(zip => queryParams.append('zipCodes', zip));
     if (searchParams.ageMin) queryParams.append('ageMin', searchParams.ageMin.toString());
     if (searchParams.ageMax) queryParams.append('ageMax', searchParams.ageMax.toString());
+    queryParams.append('action', 'search');
 
     // First, get the IDs of matching dogs
-    const searchResponse = await fetch(`${API_BASE_URL}/dogs/search?${queryParams.toString()}`, {
+    const searchResponse = await fetch(`/api/dogs?${queryParams.toString()}`, {
       method: 'GET',
       ...fetchOptions,
     });
@@ -139,7 +141,7 @@ export const searchDogs = async (
     }
 
     // Then, get the actual dog data for these IDs
-    const dogsResponse = await fetch(`${API_BASE_URL}/dogs`, {
+    const dogsResponse = await fetch('/api/dogs?action=fetch', {
       method: 'POST',
       ...fetchOptions,
       body: JSON.stringify(resultIds),
@@ -196,7 +198,7 @@ export const searchDogs = async (
 
 export const getLocations = async (zipCodes: string[]): Promise<Location[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/locations`, {
+    const response = await fetch('/api/locations', {
       method: 'POST',
       ...fetchOptions,
       body: JSON.stringify(zipCodes),
@@ -214,7 +216,7 @@ export const getLocations = async (zipCodes: string[]): Promise<Location[]> => {
 };
 
 export async function matchDogs(dogIds: string[]): Promise<string> {
-  const response = await fetch(`${API_BASE_URL}/dogs/match`, {
+  const response = await fetch('/api/dogs?action=match', {
     method: 'POST',
     ...fetchOptions,
     body: JSON.stringify(dogIds)
@@ -230,7 +232,7 @@ export async function matchDogs(dogIds: string[]): Promise<string> {
 
 export async function getBreeds(): Promise<string[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/dogs/breeds`, {
+    const response = await fetch('/api/dogs?action=breeds', {
       method: 'GET',
       ...fetchOptions,
     });
