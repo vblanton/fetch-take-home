@@ -108,13 +108,13 @@ export default function MatchedDog({ dog, onTryAgain }: MatchedDogProps) {
             <div className="flex gap-4 mt-6 min-h-11">
               <button
                 onClick={handleTryAgain}
-                className="flex-1 bg-purple-900 text-white py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors"
+                className="flex-1 bg-purple-900 text-white py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors cursor-pointer"
               >
                 Try Another Search
               </button>
               <button
                 onClick={handleAdopt}
-                className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors"
+                className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors cursor-pointer"
               >
                 Adopt {dog.name}!
               </button>

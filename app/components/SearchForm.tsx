@@ -152,7 +152,7 @@ export default function SearchForm() {
             <button
               type="button"
               onClick={handleZipCodeAddClick}
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 whitespace-nowrap shrink-0"
+              className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 whitespace-nowrap shrink-0 cursor-pointer"
               aria-label="Add zip code"
             >
               Add
@@ -205,7 +205,7 @@ export default function SearchForm() {
         <div className="flex gap-2 w-full">
           <button 
             type="submit" 
-            className="flex-1 px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800 disabled:opacity-50 h-11"
+            className="flex-1 px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800 disabled:opacity-50 h-11 cursor-pointer"
             disabled={isLoading || isBreedsLoading}
             aria-label="Search dogs"
             aria-disabled={isLoading || isBreedsLoading}
@@ -215,7 +215,7 @@ export default function SearchForm() {
           <button
             type="button"
             onClick={handleReset}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 h-11"
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 h-11 cursor-pointer"
             disabled={isLoading || isBreedsLoading}
             aria-label="Reset search form"
             aria-disabled={isLoading || isBreedsLoading}
@@ -238,7 +238,7 @@ export default function SearchForm() {
               <button
                 type="button"
                 onClick={() => removeBreed(breed)}
-                className="text-purple-900 hover:text-purple-700"
+                className="text-purple-900 hover:text-purple-700 cursor-pointer"
                 aria-label={`Remove ${breed} from selected breeds`}
               >
                 ×
@@ -255,7 +255,7 @@ export default function SearchForm() {
               <button
                 type="button"
                 onClick={() => removeZipCode(zip)}
-                className="text-blue-900 hover:text-blue-700"
+                className="text-blue-900 hover:text-blue-700 cursor-pointer"
                 aria-label={`Remove ${zip} from selected zip codes`}
               >
                 ×
@@ -273,7 +273,7 @@ export default function SearchForm() {
                   setAgeMin(undefined);
                   setAgeMax(undefined);
                 }}
-                className="text-green-900 hover:text-green-700"
+                className="text-green-900 hover:text-green-700 cursor-pointer"
                 aria-label="Clear age range"
               >
                 ×

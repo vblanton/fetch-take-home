@@ -218,7 +218,7 @@ export default function DogResults() {
           <div className="text-red-500 mb-2">{error}</div>
           <button 
             onClick={() => loadDogs(currentPage)}
-            className="px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800"
+            className="px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800 cursor-pointer"
           >
             Try Again
           </button>
@@ -245,7 +245,7 @@ export default function DogResults() {
                     <div className="text-gray-600 mb-4">No dogs found. Try changing your search criteria.</div>
                     <button 
                       onClick={() => loadDogs(currentPage)}
-                      className="px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800"
+                      className="px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800 cursor-pointer"
                     >
                       Refresh Results
                     </button>
@@ -259,7 +259,7 @@ export default function DogResults() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="h-11 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-11 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 Previous
               </button>
@@ -269,7 +269,7 @@ export default function DogResults() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="h-11 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-11 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 Next
               </button>

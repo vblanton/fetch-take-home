@@ -89,7 +89,7 @@ export default function FavoritesBar() {
         <button
           onClick={handleClearClick}
           disabled={isMatching}
-          className={`px-2 sm:px-4 py-1 rounded-full text-sm sm:text-base transition-colors ${
+          className={`px-2 sm:px-4 py-1 rounded-full text-sm sm:text-base transition-colors cursor-pointer ${
             showClearConfirm 
               ? 'bg-red-500 hover:bg-red-600' 
               : 'bg-purple-700 hover:bg-purple-600'
@@ -103,7 +103,7 @@ export default function FavoritesBar() {
         <button
           onClick={handleMatchClick}
           disabled={isMatching || favorites.length < 2}
-          className="px-2 sm:px-4 py-1 rounded-full bg-purple-700 hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+          className="px-2 sm:px-4 py-1 rounded-full bg-purple-700 hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1 sm:gap-2 text-sm sm:text-base cursor-pointer"
           aria-label="Find a match from favorites"
           aria-disabled={isMatching || favorites.length < 2}
         >

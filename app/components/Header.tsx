@@ -53,14 +53,14 @@ export default function Header() {
               <button
                 onClick={handleLogout}
                 disabled={isLoading}
-                className="flex items-center h-11 justify-center gap-2 text-white hover:text-gray-200 disabled:opacity-50 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 transition-colors"
+                className="flex items-center h-11 justify-center gap-2 text-white hover:text-gray-200 disabled:opacity-50 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 transition-colors cursor-pointer"
               >
                 Logout {isLoading && <Spinner />}
               </button>
             ) : (
               <button
                 onClick={handleLoginClick}
-                className="text-white h-11 hover:text-gray-200 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 transition-colors"
+                className="text-white h-11 hover:text-gray-200 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 transition-colors cursor-pointer"
               >
                 Login
               </button>

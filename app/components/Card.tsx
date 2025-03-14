@@ -73,7 +73,7 @@ const Card: React.FC<CardProps> = ({ dog, distance, isLoading = false }) => {
       <button
         onClick={handleLikeClick}
         disabled={isFavoriteLoading}
-        className={`absolute top-3 right-3 z-10 p-2 rounded-full bg-white/35 backdrop-blur-sm transition-transform hover:scale-110 active:scale-95 ${
+        className={`absolute top-3 right-3 z-10 p-2 rounded-full bg-white/35 backdrop-blur-sm transition-transform hover:scale-110 active:scale-95 cursor-pointer ${
           isFavoriteLoading ? 'opacity-50 cursor-not-allowed' : ''
         }`}
         aria-label={isLiked ? "Unlike" : "Like"}
