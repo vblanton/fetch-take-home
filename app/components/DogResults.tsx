@@ -209,7 +209,7 @@ export default function DogResults() {
   return (
     <>
       {!isLoggedIn && (
-        <div className="text-center text-gray-600 pt-4">
+        <div className="text-center text-gray-900 dark:text-gray-100 pt-4">
           Please log in to show available dogs.
         </div>
       )}
@@ -255,11 +255,11 @@ export default function DogResults() {
             )}
           </div>
           {!isLoading && totalPages > 1 && (
-            <div className="flex justify-center gap-2 p-4">
+            <div className="flex justify-center gap-2 p-4 text-white">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="h-11 px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-11 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Previous
               </button>
@@ -269,7 +269,7 @@ export default function DogResults() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="h-11 px-4 py-2 bg-purple-900 text-white rounded hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-11 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Next
               </button>

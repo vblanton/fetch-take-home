@@ -31,7 +31,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-[radial-gradient(circle_at_10%_10%,#4c1d95,#62169e,#4c1d95)]">
+    <header className="">
       <div className="max-w-screen-xl mx-auto overflow-hidden max-h-[250px]">
         <nav className="flex items-center justify-between gap-2 py-2 px-2 md:px-4"> 
             <Link href="/" className="flex items-center gap-2">
@@ -53,14 +53,14 @@ export default function Header() {
               <button
                 onClick={handleLogout}
                 disabled={isLoading}
-                className="flex items-center h-11 justify-center gap-2 text-white hover:text-gray-200 disabled:opacity-50 px-4 py-2 bg-purple-700 rounded hover:bg-purple-600 transition-colors"
+                className="flex items-center h-11 justify-center gap-2 text-white hover:text-gray-200 disabled:opacity-50 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 transition-colors"
               >
                 Logout {isLoading && <Spinner />}
               </button>
             ) : (
               <button
                 onClick={handleLoginClick}
-                className="text-white h-11 hover:text-gray-200 px-4 py-2 bg-purple-700 rounded hover:bg-purple-600 transition-colors"
+                className="text-white h-11 hover:text-gray-200 px-4 py-2 bg-purple-900 rounded hover:bg-purple-800 transition-colors"
               >
                 Login
               </button>

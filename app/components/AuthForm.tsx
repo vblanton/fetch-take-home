@@ -65,7 +65,7 @@ export default function AuthForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="h-11 flex items-center justify-center gap-2 px-4 py-2 bg-purple-900 text-white rounded w-full max-w-[200px] disabled:opacity-50"
+          className="h-11 flex items-center justify-center gap-2 px-4 py-2 bg-purple-900 hover:bg-purple-800 text-white rounded w-full max-w-[200px] disabled:opacity-50"
         >
             Login {isLoading && <Spinner />}
         </button>
